@@ -2,7 +2,8 @@ import InputField from '../../Shared/Form/InputField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import SwitchButton from '../../Shared/Form/SwitchButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../contexts/AuthContext';
 
 const initialValues = {
   email: '',
@@ -21,8 +22,12 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignInForm = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const onSubmit = (values) => {
     console.log(values);
+    login(values, () => navigate('/'));
   };
 
   const formik = useFormik({
@@ -36,7 +41,7 @@ const SignInForm = () => {
       <h4 className="border-b border-border p-5 text-center text-lg font-medium  text-heading">
         Sign In
       </h4>
-      <form className="p-5 ">
+      <form className="p-5 " onSubmit={formik.handleSubmit}>
         <InputField
           label="Email"
           type="email"
@@ -67,13 +72,6 @@ const SignInForm = () => {
         <button className="mt-8 w-full rounded-full bg-success p-3 font-medium text-white">
           Sign in
         </button>
-
-        <p className="mt-3 mb-4">
-          Don't have an account?{' '}
-          <Link to="/signup" className="text-primary">
-            Sign up
-          </Link>
-        </p>
       </form>
     </div>
   );

@@ -23,6 +23,7 @@ const AuthProvider = ({ children }) => {
     //   },
     // });
     localStorage.setItem('token', 'Dummy Token');
+    if (onSuccess) onSuccess();
   };
 
   const logout = (onSuccess) => {
@@ -35,6 +36,7 @@ const AuthProvider = ({ children }) => {
     //   },
     // });
     localStorage.removeItem('token');
+    if (onSuccess) onSuccess();
   };
 
   useEffect(() => {
