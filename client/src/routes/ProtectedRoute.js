@@ -9,9 +9,9 @@ const ProtectedRoute = ({ component, type = 'user' }) => {
   }
 
   if (type === 'user') {
-    return <Navigate to="/login" />;
+    return <Navigate to="/signin" />;
   } else if (type === 'admin') {
-    return <Navigate to="/admin/login" />;
+    return <Navigate to="/admin/signin" />;
   }
 };
 

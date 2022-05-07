@@ -4,7 +4,7 @@ import AppRouter from './routes';
 
 function App() {
   return (
-    <div>
+    <div className="min-h-screen w-full bg-body-bg font-poppins text-body-text">
       <AuthProvider>
         <BrowserRouter>
           <AppRouter />
