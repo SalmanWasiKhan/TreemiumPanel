@@ -9,6 +9,7 @@ module.exports = {
       },
       boxShadow: {
         card: '0 10px 20px rgb(55 55 89 / 8%)',
+        menu: '0 36px 48px rgb(27 25 148 / 8%)',
       },
       borderRadius: {
         ms: '0.25rem',
@@ -43,6 +44,7 @@ module.exports = {
       border: 'rgba(55, 55, 89, 0.1)',
       heading: '#1F2641',
       muted: '#AEAED5',
+      transparent: 'transparent',
     },
     screens: {
       xs: '0',

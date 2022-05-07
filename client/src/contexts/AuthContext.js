@@ -23,6 +23,10 @@ const AuthProvider = ({ children }) => {
     //   },
     // });
     localStorage.setItem('token', 'Dummy Token');
+    setUser({
+      name: 'Test User',
+      email: 'user@test.com',
+    });
     if (onSuccess) onSuccess();
   };
 
@@ -36,6 +40,7 @@ const AuthProvider = ({ children }) => {
     //   },
     // });
     localStorage.removeItem('token');
+    setUser(null);
     if (onSuccess) onSuccess();
   };
 
