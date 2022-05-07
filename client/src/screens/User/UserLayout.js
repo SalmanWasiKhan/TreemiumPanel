@@ -5,10 +5,10 @@ import UserRouter from '../../routes/UserRouter';
 
 const UserLayout = () => {
   return (
-    <div className="flex h-full min-h-screen w-full">
+    <div className="h-full min-h-screen w-full ">
       <Sidebar />
 
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-col md:ml-60">
         <Header />
         <main className="flex-1">
           <UserRouter />

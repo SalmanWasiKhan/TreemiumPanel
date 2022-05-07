@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import WithdrawCard from './WithdrawCard';
+import WithdrawDetails from './WithdrawDetails';
 
 const initialValues = {
   currency: '',
@@ -27,9 +28,51 @@ const Withdraw = () => {
     onSubmit,
   });
 
+  const currencies = [
+    {
+      value: 'BTC',
+      label: 'Bitcoin',
+    },
+    {
+      value: 'LTC',
+      label: 'Litecoin',
+    },
+  ];
+
+  const paymentMethods = [
+    {
+      value: '123',
+      label: 'Bank of America ********1234',
+    },
+    {
+      value: '456',
+      label: 'Master Card **** **** **** 1234',
+    },
+  ];
+
+  const constants = {
+    exchangeRate: { BTC: 0.00212455, LTC: 0.00212455 },
+    fee: 28,
+    vat: 25,
+  };
+
   return (
     <>
-      <WithdrawCard formik={formik} />
+      <WithdrawCard
+        formik={formik}
+        currencies={currencies}
+        paymentMethods={paymentMethods}
+      />
+      <WithdrawDetails
+        amount={formik.values.amount}
+        currency={formik.values.currency}
+        paymentMethod={paymentMethods.find(
+          (paymentMethod) => paymentMethod.value === formik.values.paymentMethod
+        )}
+        exchangeRate={constants.exchangeRate[formik.values.currency] || null}
+        fee={constants.fee}
+        vat={constants.vat}
+      />
     </>
   );
 };

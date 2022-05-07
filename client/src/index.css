@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .table-spacing {
+    border-spacing: 0 1rem;
+  }
+}

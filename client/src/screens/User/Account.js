@@ -7,13 +7,13 @@ const Account = () => {
   const { user } = useAuth();
 
   return (
-    <div className="py-5">
-      <div className="mx-auto max-w-6xl px-4">
+    <div className="max-h-[85vh] overflow-auto py-5">
+      <div className="mx-auto max-w-lg px-4 md:max-w-6xl">
         <p className="text-lg font-medium text-primary ">
           Welcome Back, <span className="text-heading">{user.name}</span>
         </p>
 
-        <div className="mt-8 grid grid-cols-2 items-start gap-7">
+        <div className="mt-8 grid grid-cols-1 items-start gap-7 lg:grid-cols-2">
           <InfoCard />
           <WalletCard />
           <Withdraw />

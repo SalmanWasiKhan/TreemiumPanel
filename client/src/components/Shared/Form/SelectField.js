@@ -24,7 +24,7 @@ const SelectField = ({
         )}
         <select
           id={name}
-          className="block flex-1 rounded-ms border-0 bg-transparent px-5 font-medium text-heading transition duration-150 focus:ring-1 focus:ring-primary"
+          className="block min-w-0 flex-1 rounded-ms border-0 bg-transparent px-5 font-medium text-heading transition duration-150 focus:ring-1 focus:ring-primary"
           placeholder={placeholder}
           value={value}
           onClick={onClick}

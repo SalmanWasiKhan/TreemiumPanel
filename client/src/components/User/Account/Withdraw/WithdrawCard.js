@@ -3,7 +3,7 @@ import BitcoinIcon from '../../../../assets/icons/BitcoinIcon';
 import BankIcon from '../../../../assets/icons/BankIcon';
 import InputField from '../../../Shared/Form/InputField';
 
-const WithdrawCard = ({ formik }) => {
+const WithdrawCard = ({ formik, currencies, paymentMethods }) => {
   return (
     <div className="w-full rounded-2xl bg-white shadow-card">
       <h4 className="border-b border-border p-5 text-lg font-medium  text-heading">
@@ -14,16 +14,7 @@ const WithdrawCard = ({ formik }) => {
         <SelectField
           Icon={BitcoinIcon}
           label="Currency"
-          options={[
-            {
-              value: 'BTC',
-              label: 'Bitcoin',
-            },
-            {
-              value: 'LTC',
-              label: 'Litecoin',
-            },
-          ]}
+          options={currencies}
           {...formik.getFieldProps('currency')}
           error={formik.touched.currency && formik.errors.currency}
         />
@@ -31,16 +22,7 @@ const WithdrawCard = ({ formik }) => {
         <SelectField
           Icon={BankIcon}
           label="Payment Method"
-          options={[
-            {
-              value: '123',
-              label: 'Bank of America ********1234',
-            },
-            {
-              value: '456',
-              label: 'Master Card **** **** **** 1234',
-            },
-          ]}
+          options={paymentMethods}
           {...formik.getFieldProps('paymentMethod')}
           error={formik.touched.paymentMethod && formik.errors.paymentMethod}
         />
@@ -64,7 +46,7 @@ const WithdrawCard = ({ formik }) => {
           type="submit"
           className="mt-8 w-full rounded-full bg-success p-3 font-medium text-white"
         >
-          Withdraw
+          Withdraw Now
         </button>
       </form>
     </div>
