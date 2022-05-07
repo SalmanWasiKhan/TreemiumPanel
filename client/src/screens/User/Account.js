@@ -1,5 +1,6 @@
 import InfoCard from '../../components/User/Account/InfoCard';
 import WalletCard from '../../components/User/Account/WalletCard';
+import Withdraw from '../../components/User/Account/Withdraw';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Account = () => {
@@ -15,6 +16,7 @@ const Account = () => {
         <div className="mt-8 grid grid-cols-2 items-start gap-7">
           <InfoCard />
           <WalletCard />
+          <Withdraw />
         </div>
       </div>
     </div>
