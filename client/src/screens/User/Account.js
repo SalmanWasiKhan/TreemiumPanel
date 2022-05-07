@@ -1,4 +1,5 @@
 import InfoCard from '../../components/User/Account/InfoCard';
+import WalletCard from '../../components/User/Account/WalletCard';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Account = () => {
@@ -11,8 +12,9 @@ const Account = () => {
           Welcome Back, <span className="text-heading">{user.name}</span>
         </p>
 
-        <div className="mt-8 grid grid-cols-2 gap-7">
+        <div className="mt-8 grid grid-cols-2 items-start gap-7">
           <InfoCard />
+          <WalletCard />
         </div>
       </div>
     </div>
