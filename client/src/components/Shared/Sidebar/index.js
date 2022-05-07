@@ -7,7 +7,7 @@ import TwitterIcon from '../../../assets/icons/TwitterIcon';
 
 const Sidebar = () => {
   return (
-    <aside className="flex w-60 flex-col p-7">
+    <aside className="hidden w-60 flex-col p-7 md:flex">
       <div className="py-4">
         <div className="w-8">
           <img
