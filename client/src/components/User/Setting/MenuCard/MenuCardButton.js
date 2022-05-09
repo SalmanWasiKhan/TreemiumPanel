@@ -11,7 +11,7 @@ const MenuCardButton = ({ path, label, Icon }) => {
         `/${activePage}/${subPage}` === path ? 'text-primary' : ''
       }`}
     >
-      <Icon className="h-5 w-5" /> {label}
+      <Icon className="h-5 w-5 flex-shrink-0" /> {label}
     </Link>
   );
 };
