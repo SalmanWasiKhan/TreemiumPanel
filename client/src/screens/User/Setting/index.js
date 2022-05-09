@@ -1,8 +1,27 @@
-
+import MenuCard from '../../../components/User/Setting/MenuCard';
+import { useAuth } from '../../../contexts/AuthContext';
+import SettingRouter from '../../../routes/SettingRoutes';
 const Setting = () => {
+  const { user } = useAuth();
   return (
-    <div>Setting</div>
-  )
-}
+    <div className="max-h-[85vh] overflow-auto py-5">
+      <div className="mx-auto max-w-lg px-4 md:max-w-6xl">
+        <p className="text-lg font-medium text-primary ">
+          Welcome Back, <span className="text-heading">{user.name}</span>
+        </p>
 
-export default Setting
+        <div className="mt-8 grid grid-cols-10 items-start gap-7">
+          <div className="col-span-10 md:col-span-4 lg:col-span-3">
+            <MenuCard />
+          </div>
+
+          <div className="ool-span-10 md:col-span-6 lg:col-span-7">
+            <SettingRouter />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Setting;
