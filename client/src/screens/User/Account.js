@@ -1,3 +1,4 @@
+// import ActivitiesCard from '../../components/User/Account/ActivitiesCard';
 import InfoCard from '../../components/User/Account/InfoCard';
 import WalletCard from '../../components/User/Account/WalletCard';
 import Withdraw from '../../components/User/Account/Withdraw';
@@ -17,6 +18,7 @@ const Account = () => {
           <InfoCard />
           <WalletCard />
           <Withdraw />
+          {/* <ActivitiesCard /> */}
         </div>
       </div>
     </div>
