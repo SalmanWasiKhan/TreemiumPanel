@@ -21,7 +21,7 @@ const SettingRouter = () => {
           element={<ProtectedRoute component={<Preferences />} />}
         />
         <Route
-          path="/linked-accounts"
+          path="/linked-accounts/*"
           element={<ProtectedRoute component={<LinkedAccounts />} />}
         />
 
