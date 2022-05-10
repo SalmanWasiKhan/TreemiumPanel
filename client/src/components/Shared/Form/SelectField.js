@@ -8,13 +8,16 @@ const SelectField = ({
   error,
   options,
   Icon,
+  noGap,
   ...props
 }) => {
   return (
-    <div className="relative mb-7">
-      <label htmlFor={name} className="mb-4 block font-medium text-heading">
-        {label}
-      </label>
+    <div className={`relative ${noGap ? 'mb-0' : 'mb-7'}`}>
+      {label && (
+        <label htmlFor={name} className="mb-4 block font-medium text-heading">
+          {label}
+        </label>
+      )}
 
       <div className="box-border flex w-full divide-x divide-border rounded-ms border border-border bg-body-bg">
         {Icon && (
