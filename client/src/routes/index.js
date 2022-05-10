@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import AuthRoute from './AuthRoute';
 
 const UserLayout = lazy(() => import('../screens/User/UserLayout'));
+const AdminLayout = lazy(() => import('../screens/Admin/AdminLayout'));
 const SignIn = lazy(() => import('../screens/User/SignIn'));
 const ForgotPassword = lazy(() => import('../screens/User/ForgotPassword'));
 const ResetPassword = lazy(() => import('../screens/User/ResetPassword'));
@@ -12,6 +13,7 @@ const AppRouter = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/*" element={<UserLayout />} />
+        <Route path="/admin/*" element={<AdminLayout />} />
 
         <Route path="/signin" element={<AuthRoute component={<SignIn />} />} />
         <Route

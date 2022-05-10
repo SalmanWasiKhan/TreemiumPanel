@@ -1,11 +1,10 @@
 import logo from '../../../assets/images/logo.png';
 import SidebarButton from './SidebarButton';
-import { UserIcon, CogIcon } from '@heroicons/react/solid';
 import YoutubeIcon from '../../../assets/icons/YoutubeIcon';
 import InstagramIcon from '../../../assets/icons/InstagramIcon';
 import TwitterIcon from '../../../assets/icons/TwitterIcon';
 
-const Sidebar = () => {
+const Sidebar = ({ links, admin }) => {
   return (
     <aside className="fixed left-0 hidden h-full w-60 flex-col p-7 md:flex">
       <div className="py-4">
@@ -22,8 +21,15 @@ const Sidebar = () => {
       </div>
 
       <nav className="mt-7 flex-1 border-t border-border py-12">
-        <SidebarButton path="/" label="Account" Icon={UserIcon} />
-        <SidebarButton path="/setting" label="Setting" Icon={CogIcon} />
+        {links?.map(({ label, path, Icon }) => (
+          <SidebarButton
+            key={label}
+            label={label}
+            path={path}
+            Icon={Icon}
+            admin={admin}
+          />
+        ))}
       </nav>
 
       <div className="">

@@ -1,10 +1,16 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
-const useActivePage = () => {
-  const { pathname } = useLocation();
+const useActivePage = (admin) => {
+  let { pathname } = useLocation();
 
-  const activePage = pathname.split("/")[1];
-  const subPage = pathname.split("/")[2];
+  if (admin) {
+    pathname = pathname.replace('/admin', '');
+  }
+
+  console.log(pathname);
+
+  const activePage = pathname.split('/')[1];
+  const subPage = pathname.split('/')[2];
 
   return { activePage, subPage };
 };

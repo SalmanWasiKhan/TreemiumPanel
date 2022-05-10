@@ -1,6 +1,6 @@
 import MenuCard from '../../../components/User/Setting/MenuCard';
 import { useAuth } from '../../../contexts/AuthContext';
-import SettingRouter from '../../../routes/SettingRoutes';
+import SettingRouter from '../../../routes/SettingRouter';
 const Setting = () => {
   const { user } = useAuth();
   return (

@@ -2,7 +2,7 @@ import MainMenu from './MainMenu';
 import SearchBar from './SearchBar';
 import logo from '../../../assets/images/logo.png';
 
-const Header = () => {
+const Header = ({ links }) => {
   return (
     <header className="bg-body-bg py-2.5">
       <div className="mx-auto flex max-w-lg items-center justify-between gap-4 px-4 lg:max-w-6xl">
@@ -12,7 +12,7 @@ const Header = () => {
             <SearchBar />
           </div>
         </div>
-        <MainMenu />
+        <MainMenu links={links} />
       </div>
     </header>
   );
