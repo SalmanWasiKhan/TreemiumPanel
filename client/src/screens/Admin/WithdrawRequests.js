@@ -60,7 +60,9 @@ const WithdrawRequests = () => {
       <div className="mx-auto max-w-lg px-4 md:max-w-6xl">
         <div className="col-span-2 w-full rounded-2xl bg-white shadow-card">
           <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
-            <h4 className="text-lg font-medium text-heading">Linked Account</h4>
+            <h4 className="text-lg font-medium text-heading">
+              Withdraw Requests
+            </h4>
 
             <div className="flex items-center justify-center gap-4">
               <span>Request Status</span>
