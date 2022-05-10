@@ -7,8 +7,6 @@ const useActivePage = (admin) => {
     pathname = pathname.replace('/admin', '');
   }
 
-  console.log(pathname);
-
   const activePage = pathname.split('/')[1];
   const subPage = pathname.split('/')[2];
 

@@ -1,5 +1,9 @@
-const Tbody = ({ children }) => {
-  return <tbody className="">{children}</tbody>;
+const Tbody = ({ children, className, ...props }) => {
+  return (
+    <tbody className={`${className}`} {...props}>
+      {children}
+    </tbody>
+  );
 };
 
 export default Tbody;

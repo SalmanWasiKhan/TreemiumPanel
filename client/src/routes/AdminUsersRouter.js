@@ -16,7 +16,7 @@ const AdminUsersRouter = () => {
           element={<ProtectedRoute component={<ListUsers />} />}
         />
         <Route
-          path="/profile/:id"
+          path="/:id"
           element={<ProtectedRoute component={<ViewProfile />} />}
         />
         <Route
@@ -24,7 +24,7 @@ const AdminUsersRouter = () => {
           element={<ProtectedRoute component={<AddUser />} />}
         />
         <Route
-          path="/edit/:id"
+          path="/:id/edit"
           element={<ProtectedRoute component={<EditProfile />} />}
         />
 

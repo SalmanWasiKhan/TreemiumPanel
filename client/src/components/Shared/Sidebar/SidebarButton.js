@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 const SidebarButton = ({ path, label, Icon, admin }) => {
   const { activePage } = useActivePage(admin);
 
-  console.log(activePage, path);
-
   const isActive =
     '/' + activePage === (admin ? path.replace('/admin', '') : path);
 
