@@ -15,7 +15,7 @@ const UsersTable = ({ users, pageCount }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="col-span-2 w-full rounded-2xl bg-white p-5 shadow-card">
+    <>
       <Table>
         <Thead>
           <Tr>
@@ -66,7 +66,7 @@ const UsersTable = ({ users, pageCount }) => {
         </Tbody>
       </Table>
       {pageCount > 1 && <Pagination totalPages={pageCount} />}
-    </div>
+    </>
   );
 };
 
