@@ -22,7 +22,7 @@ const LinkedCard = () => {
         <div className="pt-4">
           <button
             className="rounded-full bg-primary px-6 py-3 font-medium text-white"
-            onClick={() => navigate('/setting/linked-accounts/add')}
+            onClick={() => navigate('/add-bank-account')}
           >
             Add Bank Account
           </button>

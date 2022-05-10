@@ -45,7 +45,7 @@ const AccountInfo = ({ id, bankName, number, verified }) => {
           </button>
           <button
             className="transition hover:text-primary"
-            onClick={() => navigate(`/setting/linked-accounts/edit/${id}`)}
+            onClick={() => navigate(`/edit-bank-account/${id}`)}
           >
             <PencilIcon className="h-5 w-5" />
           </button>
