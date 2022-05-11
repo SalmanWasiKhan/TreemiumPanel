@@ -7,12 +7,12 @@ const Details = ({ user }) => {
         <h5 className="inline font-medium text-heading">Address</h5>
         <span className="text-muted">{user.address}</span>
       </li>
-      <li className="mb-2 space-x-6">
+      {/* <li className="mb-2 space-x-6">
         <h5 className="inline font-medium text-heading">Total Log</h5>
         <span>
           {user.totalLogs} Time (Today {user.logsToday} Times)
         </span>
-      </li>
+      </li> */}
       <li className="mb-2 space-x-6 text-danger">
         <h5 className="inline font-medium">Last Log</h5>
         <span>{dayjs(user.lastLog).format('DD MMMM YYYY, HH:mm A')}</span>

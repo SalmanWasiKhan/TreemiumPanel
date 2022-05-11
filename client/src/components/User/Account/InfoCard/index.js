@@ -23,7 +23,7 @@ const InfoCard = () => {
     <div className="w-full rounded-2xl bg-white p-5 shadow-card">
       <BasicInfo user={user} />
       <Details user={user} />
-      <Socials user={user} />
+      {/* <Socials user={user} /> */}
     </div>
   );
 };
