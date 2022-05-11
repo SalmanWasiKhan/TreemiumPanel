@@ -71,13 +71,13 @@ class UserController {
         .limit(limit);
 
       const total = await User.countDocuments();
+      const totalPages = Math.ceil(total / limit);
 
       return res.status(200).json({
         data: {
           users,
           total,
-          page,
-          limit,
+          totalPages,
         },
       });
     } catch (error) {
@@ -201,13 +201,13 @@ class UserController {
         ...(user ? { user } : {}),
         ...(status ? { status } : {}),
       });
+      const totalPages = Math.ceil(total / limit);
 
       return res.status(200).json({
         data: {
           bankAccounts,
           total,
-          page,
-          limit,
+          totalPages,
         },
       });
     } catch (error) {
