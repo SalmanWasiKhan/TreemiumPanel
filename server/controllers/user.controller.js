@@ -218,6 +218,42 @@ class UserController {
     }
   }
 
+  // update a bank account
+  static async updateBankAccount(req, res) {
+    try {
+      const bankAccount = await BankAccount.findById(req.params.id);
+
+      if (!bankAccount) {
+        return res.status(404).json({
+          message: 'Bank account not found',
+        });
+      }
+
+      const update = req.body;
+      update.status = 'pending';
+
+      const updatedBankAccount = await BankAccount.findByIdAndUpdate(
+        req.params.id,
+        update,
+        {
+          new: true,
+        }
+      );
+
+      return res.status(200).json({
+        message: 'Bank account update requested!',
+        data: {
+          ...updatedBankAccount.toJSON(),
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        message: 'Internal server error',
+      });
+    }
+  }
+
   // approve or reject a bank account request
   static async approveBankAccount(req, res) {
     try {

@@ -9,7 +9,7 @@ const Header = ({ links }) => {
         <div className="flex flex-1 items-center gap-4">
           <img src={logo} alt="Treemium" className="block w-7 md:hidden" />
           <div className="w-44 sm:flex-grow md:w-96 md:flex-grow-0">
-            <SearchBar />
+            {/* <SearchBar /> */}
           </div>
         </div>
         <MainMenu links={links} />

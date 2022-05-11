@@ -24,6 +24,11 @@ router.get(
 router.post('/bank-accounts', requireUser(), UserController.requestBankAccount);
 router.put(
   '/bank-accounts/:id',
+  requireUser(),
+  UserController.updateBankAccount
+);
+router.put(
+  '/bank-accounts/approve/:id',
   requireUser({ admin: true }),
   UserController.approveBankAccount
 );
