@@ -25,6 +25,9 @@ class AuthController {
         rememberMe,
       });
 
+      user.lastLog = new Date();
+      await user.save();
+
       const userData = user.toJSON();
 
       return res.status(200).json({

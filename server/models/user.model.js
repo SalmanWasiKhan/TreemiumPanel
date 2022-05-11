@@ -5,11 +5,12 @@ const { sign } = require('../utils/jwt.utils');
 const Schema = mongoose.Schema;
 
 /**
- * @description User Schema
+ * @typedef User Schema
  * @param {String} name
  * @param {String} email
  * @param {String} password
  * @param {String} role
+ * @param {Number} balance
  * @param {String} profilePic
  * @param {String} phoneNumber
  * @param {String} presentAddress
@@ -48,6 +49,10 @@ const UserSchema = new Schema(
       required: true,
       enum: ['user', 'admin'],
       default: 'user',
+    },
+    balance: {
+      type: Number,
+      default: 0,
     },
     profilePic: {
       type: String,

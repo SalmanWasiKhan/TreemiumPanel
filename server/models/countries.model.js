@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 /**
- * @description Countries Schema
+ * @typedef Countries Schema
  * @param {String} country
  */
 

@@ -8,12 +8,14 @@ const initialValues = {
   routingNumber: '',
   accountNumber: '',
   fullName: '',
+  bankName: '',
 };
 
 const validationSchema = Yup.object({
   routingNumber: Yup.number().required('Routing number is required'),
   accountNumber: Yup.string().required('Account number is required'),
   fullName: Yup.string().required('Full name is required'),
+  bankName: Yup.string().required('Bank name is required'),
 });
 
 const AddAccount = () => {
@@ -54,6 +56,12 @@ const AddAccount = () => {
             placeholder="John Doe"
             {...formik.getFieldProps('fullName')}
             error={formik.touched.fullName && formik.errors.fullName}
+          />
+          <InputField
+            label="Bank name"
+            placeholder="Bank of America"
+            {...formik.getFieldProps('bankName')}
+            error={formik.touched.bankName && formik.errors.bankName}
           />
 
           <img src={routingImage} alt="Routing" className="w-full" />
