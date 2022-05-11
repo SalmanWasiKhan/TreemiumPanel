@@ -4,14 +4,17 @@ const fileUpload = require('express-fileupload');
 const connectDB = require('./utils/connectDB');
 const path = require('path');
 require('dotenv').config();
+const deserializeUser = require('./middlewares/deserializeUser');
 
 const routes = require('./routes');
 
 const app = express();
 
+// middlewares
 app.use(cors());
 app.use(express.json());
 app.use(fileUpload());
+app.use(deserializeUser);
 
 // static
 app.use('/public', express.static(path.join(__dirname, 'public')));

@@ -1,5 +1,5 @@
 const requireUser =
-  ({ self } = {}) =>
+  ({ self, admin } = {}) =>
   (req, res, next) => {
     const user = req.user;
 
@@ -9,7 +9,13 @@ const requireUser =
       });
     }
 
-    if (self && user._id !== req[self]) {
+    if (admin && !user.role === 'admin') {
+      return res.status(401).json({
+        message: 'Unauthorized',
+      });
+    }
+
+    if (self && (user._id !== req[self] || (admin && user.role !== 'admin'))) {
       return res.status(401).json({
         message: 'Unauthorized',
       });
