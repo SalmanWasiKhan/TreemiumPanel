@@ -64,9 +64,9 @@ const SignInForm = () => {
             setEnabled={(value) => formik.setFieldValue('rememberMe', value)}
           />
 
-          <Link to="/forgot-password" className="">
+          {/* <Link to="/forgot-password" className="">
             Forgot password?
-          </Link>
+          </Link> */}
         </div>
 
         <button className="mt-8 w-full rounded-full bg-success p-3 font-medium text-white">

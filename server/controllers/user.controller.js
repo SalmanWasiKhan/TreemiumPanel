@@ -201,7 +201,9 @@ class UserController {
         ...(status ? { status } : {}),
       })
         .skip((page - 1) * limit)
-        .limit(limit);
+        .limit(limit)
+        .sort({ createdAt: -1 })
+        .populate('user');
 
       const total = await BankAccount.countDocuments({
         ...(user ? { user } : {}),
@@ -304,7 +306,9 @@ class UserController {
       );
 
       return res.status(200).json({
-        message: 'Bank account approved!',
+        message: req.body.approved
+          ? 'Bank Account approved!'
+          : 'Bank Account rejected',
         data: updatedBankAccount,
       });
     } catch (error) {

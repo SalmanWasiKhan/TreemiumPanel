@@ -9,8 +9,21 @@ import {
 } from '../../Shared/Table';
 import { CheckIcon, BanIcon } from '@heroicons/react/solid';
 import { Link } from 'react-router-dom';
+import { UserAPI } from '../../../api';
 
-const RequestsTable = ({ requests, pageCount }) => {
+const RequestsTable = ({ requests, pageCount, loading, reload }) => {
+  const approveRequest = (id) => {
+    UserAPI.approveBankAccount(id, true).then(() => {
+      reload();
+    });
+  };
+
+  const rejectRequest = (id) => {
+    UserAPI.approveBankAccount(id, false).then(() => {
+      reload();
+    });
+  };
+
   return (
     <>
       <Table>
@@ -42,11 +55,18 @@ const RequestsTable = ({ requests, pageCount }) => {
                   <div className="flex items-center justify-center gap-2">
                     <button
                       className="transition hover:text-success"
-                      onClick={() => {}}
+                      onClick={() => {
+                        approveRequest(request._id);
+                      }}
                     >
                       <CheckIcon className="h-5 w-5" />
                     </button>
-                    <button className="transition hover:text-danger">
+                    <button
+                      className="transition hover:text-danger"
+                      onClick={() => {
+                        rejectRequest(request._id);
+                      }}
+                    >
                       <BanIcon className="h-5 w-5" />
                     </button>
                   </div>
@@ -62,10 +82,17 @@ const RequestsTable = ({ requests, pageCount }) => {
               </Td>
             </Tr>
           ))}
-          {requests?.length === 0 && (
+          {!loading && requests?.length === 0 && (
             <Tr>
-              <Td colSpan={4} className="text-center">
+              <Td colSpan={5} className="text-center">
                 No users found
+              </Td>
+            </Tr>
+          )}
+          {loading && (
+            <Tr>
+              <Td colSpan={5} className="text-center">
+                Loading...
               </Td>
             </Tr>
           )}
