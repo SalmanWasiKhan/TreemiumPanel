@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RequestsTable from '../../components/Admin/WithdrawRequests/RequestsTable';
 import SelectField from '../../components/Shared/Form/SelectField';
+import useSearchParams from '../../hooks/useSearchParams';
+import { WithdrawRequestAPI } from '../../api';
 
 const withdrawStatuses = [
   {
@@ -17,43 +19,67 @@ const withdrawStatuses = [
   },
 ];
 
-const requests = [
-  {
-    _id: '5e9f8f8f8f8f8f8f8f8f8f8',
-    user: {
-      _id: '5e9f8f8f8f8f8f8f8f8f8f8',
-      name: 'John Doe',
-    },
-    amount: 0.21,
-    total: 200,
-    status: 'pending',
-  },
-  {
-    _id: '1da3a3a3a3a3a3a3a3a3a3a3',
-    user: {
-      _id: '1da3a3a3a3a3a3a3a3a3a3a3',
-      name: 'Jane Doe',
-    },
-    amount: 0.1,
-    total: 100,
-    status: 'approved',
-  },
-  {
-    _id: '2da3a3a3a3a3a3a3a3a3a3a3',
-    user: {
-      _id: '2da3a3a3a3a3a3a3a3a3a3a3',
-      name: 'James Doe',
-    },
-    amount: 0.02,
-    total: 20,
-    status: 'rejected',
-  },
-];
+// const requests = [
+//   {
+//     _id: '5e9f8f8f8f8f8f8f8f8f8f8',
+//     user: {
+//       _id: '5e9f8f8f8f8f8f8f8f8f8f8',
+//       name: 'John Doe',
+//     },
+//     amount: 0.21,
+//     total: 200,
+//     status: 'pending',
+//   },
+//   {
+//     _id: '1da3a3a3a3a3a3a3a3a3a3a3',
+//     user: {
+//       _id: '1da3a3a3a3a3a3a3a3a3a3a3',
+//       name: 'Jane Doe',
+//     },
+//     amount: 0.1,
+//     total: 100,
+//     status: 'approved',
+//   },
+//   {
+//     _id: '2da3a3a3a3a3a3a3a3a3a3a3',
+//     user: {
+//       _id: '2da3a3a3a3a3a3a3a3a3a3a3',
+//       name: 'James Doe',
+//     },
+//     amount: 0.02,
+//     total: 20,
+//     status: 'rejected',
+//   },
+// ];
 
-const pageCount = 3;
+// const pageCount = 3;
 
 const WithdrawRequests = () => {
   const [selectedStatus, setSelectedStatus] = useState('');
+  const { search } = useSearchParams();
+  const currentPage = parseInt(search.page || '1', 10);
+  const perPage = parseInt(search.perPage || '10', 10);
+
+  const [requests, setRequests] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const getRequests = () => {
+    setLoading(true);
+    WithdrawRequestAPI.getWithdrawRequests({
+      status: selectedStatus,
+      page: currentPage,
+      limit: perPage,
+    }).then((res) => {
+      setRequests(res.withdrawRequests);
+      setTotalPages(res.totalPages);
+      setLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    getRequests();
+  }, [selectedStatus, currentPage, perPage]);
 
   return (
     <div className="max-h-[85vh] overflow-auto py-5">
@@ -84,8 +110,10 @@ const WithdrawRequests = () => {
 
           <div className="p-5">
             <RequestsTable
-              requests={requests.slice(0, 10)}
-              pageCount={pageCount}
+              requests={requests}
+              pageCount={totalPages}
+              loading={loading}
+              reload={getRequests}
             />
           </div>
         </div>

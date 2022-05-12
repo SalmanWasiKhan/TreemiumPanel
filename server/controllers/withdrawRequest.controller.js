@@ -49,7 +49,9 @@ class WithdrawRequestController {
       })
         .sort({ createdAt: -1 })
         .skip((page - 1) * limit)
-        .limit(limit);
+        .limit(limit)
+        .populate('user')
+        .populate('paymentMethod');
 
       const total = await WithdrawRequest.countDocuments({
         ...(status ? { status } : {}),

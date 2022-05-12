@@ -1,4 +1,4 @@
-// import ActivitiesCard from '../../components/User/Account/ActivitiesCard';
+import ActivitiesCard from '../../components/User/Account/ActivitiesCard';
 import InfoCard from '../../components/User/Account/InfoCard';
 import WalletCard from '../../components/User/Account/WalletCard';
 import Withdraw from '../../components/User/Account/Withdraw';
@@ -35,7 +35,7 @@ const Account = () => {
               <InfoCard user={user} />
               <WalletCard user={user} />
               <Withdraw user={user} />
-              {/* <ActivitiesCard /> */}
+              <ActivitiesCard user={user} />
             </>
           )}
         </div>

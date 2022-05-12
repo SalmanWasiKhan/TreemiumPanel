@@ -75,7 +75,7 @@ const WithdrawRequests = () => {
 
           <div className="p-5">
             <RequestsTable
-              requests={requests.slice(0, 10)}
+              requests={requests}
               pageCount={totalPages}
               loading={loading}
               reload={getRequests}
