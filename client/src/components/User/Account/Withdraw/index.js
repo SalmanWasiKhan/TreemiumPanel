@@ -17,7 +17,7 @@ const validationSchema = Yup.object().shape({
     .required('This field is required.'),
 });
 
-const Withdraw = () => {
+const Withdraw = ({ user }) => {
   const onSubmit = (values) => {
     console.log(values);
   };
@@ -39,16 +39,12 @@ const Withdraw = () => {
     },
   ];
 
-  const paymentMethods = [
-    {
-      value: '123',
-      label: 'Bank of America ********1234',
-    },
-    {
-      value: '456',
-      label: 'Master Card **** **** **** 1234',
-    },
-  ];
+  const paymentMethods = user.bankAccounts.map((bankAccount) => {
+    return {
+      value: bankAccount._id,
+      label: bankAccount.bankName,
+    };
+  });
 
   const constants = {
     exchangeRate: { BTC: 0.00212455, LTC: 0.00212455 },

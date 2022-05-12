@@ -5,7 +5,7 @@ const Details = ({ user }) => {
     <ul>
       <li className="mb-2 space-x-6">
         <h5 className="inline font-medium text-heading">Address</h5>
-        <span className="text-muted">{user.address}</span>
+        <span className="text-muted">{user.address || 'Not Provided'}</span>
       </li>
       {/* <li className="mb-2 space-x-6">
         <h5 className="inline font-medium text-heading">Total Log</h5>
