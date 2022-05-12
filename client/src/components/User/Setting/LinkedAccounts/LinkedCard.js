@@ -9,13 +9,18 @@ const LinkedCard = () => {
 
   const { user: authUser } = useAuth();
   const [bankAccounts, setBankAccounts] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const getAccounts = () => {
+    setLoading(true);
     UserAPI.getBankAccounts({ user: authUser._id }).then((res) => {
       setBankAccounts(res.bankAccounts);
       setLoading(false);
     });
+  };
+
+  useEffect(() => {
+    getAccounts();
   }, []);
 
   return (
@@ -31,8 +36,7 @@ const LinkedCard = () => {
           </div>
         ) : (
           <>
-            {bankAccounts.map((bankAccount) => {
-              console.log(bankAccount);
+            {bankAccounts?.map((bankAccount) => {
               return (
                 <AccountInfo
                   key={bankAccount._id}
@@ -40,6 +44,7 @@ const LinkedCard = () => {
                   bankName={bankAccount.bankName}
                   number={bankAccount.accountNumber}
                   verified={bankAccount.status}
+                  reload={getAccounts}
                 />
               );
             })}

@@ -14,7 +14,9 @@ const initialValues = {
 
 const validationSchema = Yup.object({
   routingNumber: Yup.number().required('Routing number is required'),
-  accountNumber: Yup.string().required('Account number is required'),
+  accountNumber: Yup.string()
+    .required('Account number is required')
+    .matches(/^\d{9,}$/, 'Invalid account number'),
   fullName: Yup.string().required('Full name is required'),
   bankName: Yup.string().required('Bank name is required'),
 });

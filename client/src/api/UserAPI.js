@@ -67,6 +67,11 @@ class UserAPI extends BaseRoutes {
     const res = await this._put(`/bank-accounts/approve/${id}`, { approved });
     return res;
   };
+
+  deleteBankAccount = async (id) => {
+    const res = await this._delete(`/bank-accounts/${id}`);
+    return res;
+  };
 }
 
 export default new UserAPI();

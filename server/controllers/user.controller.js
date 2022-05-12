@@ -292,6 +292,30 @@ class UserController {
       });
     }
   }
+
+  // delete a bank account
+  static async deleteBankAccount(req, res) {
+    try {
+      const bankAccount = await BankAccount.findById(req.params.id);
+
+      if (!bankAccount) {
+        return res.status(404).json({
+          message: 'Bank account not found',
+        });
+      }
+
+      await BankAccount.findByIdAndDelete(req.params.id);
+
+      return res.status(200).json({
+        message: 'Bank account deleted!',
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        message: 'Internal server error',
+      });
+    }
+  }
 }
 
 module.exports = UserController;

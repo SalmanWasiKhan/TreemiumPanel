@@ -8,10 +8,9 @@ import {
   CheckIcon,
 } from '@heroicons/react/solid';
 import { useNavigate } from 'react-router-dom';
+import { UserAPI } from '../../../../api';
 
-const AccountInfo = ({ id, bankName, number, verified }) => {
-  console.log(id, bankName, number, verified);
-
+const AccountInfo = ({ id, bankName, number, verified, reload }) => {
   const navigate = useNavigate();
   const [showAccountInfo, setShowAccountInfo] = useState(false);
 
@@ -19,6 +18,12 @@ const AccountInfo = ({ id, bankName, number, verified }) => {
     const last4Digits = number.substring(number.length - 4);
     const stars = '*'.repeat(number.length - 4);
     return `${stars}${last4Digits}`;
+  };
+
+  const removeAccount = () => {
+    UserAPI.deleteBankAccount(id).then(() => {
+      reload();
+    });
   };
 
   return (
@@ -51,7 +56,7 @@ const AccountInfo = ({ id, bankName, number, verified }) => {
           >
             <PencilIcon className="h-5 w-5" />
           </button>
-          <button className="text-danger">
+          <button className="text-danger" onClick={removeAccount}>
             <TrashIcon className="h-5 w-5" />
           </button>
         </div>

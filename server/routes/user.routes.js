@@ -30,6 +30,11 @@ router.put(
   requireUser({ self: 'params.id', admin: true }),
   UserController.updateUser
 );
+router.delete(
+  '/bank-accounts/:id',
+  requireUser(),
+  UserController.deleteBankAccount
+);
 router.delete('/:id', requireUser({ admin: true }), UserController.deleteUser);
 router.post('/bank-accounts', requireUser(), UserController.requestBankAccount);
 
