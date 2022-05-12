@@ -13,11 +13,11 @@ const BasicInfo = ({ user }) => {
         )}
       </div>
       <div className="">
-        <span className="block">Hello</span>
+        {/* <span className="block">Hello</span> */}
         <h4 className="mb-2 text-lg font-medium text-heading">{user.name}</h4>
         <p className="mb-1 flex flex-wrap items-center gap-2">
           <PhoneIcon className="h-4 w-4 text-primary" />
-          {user.phone}
+          {user.phone || 'Not Provided'}
         </p>
         <p className="mb-1 flex flex-wrap items-center gap-2">
           <MailIcon className="h-5 w-5 text-primary" />
