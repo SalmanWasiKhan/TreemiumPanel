@@ -13,7 +13,7 @@ const ListUsers = () => {
   const currentPage = parseInt(search.page, 10) || 1;
   const perPage = 10;
 
-  useEffect(() => {
+  const getUsers = async () => {
     setLoading(true);
     UserAPI.getUsers({ page: currentPage, limit: perPage }).then(
       ({ users, totalPages }) => {
@@ -22,6 +22,10 @@ const ListUsers = () => {
         setLoading(false);
       }
     );
+  };
+
+  useEffect(() => {
+    getUsers();
   }, [currentPage]);
 
   return (
@@ -43,6 +47,7 @@ const ListUsers = () => {
               users={users.slice(0, 10)}
               pageCount={totalPages}
               loading={loading}
+              reload={getUsers}
             />
           </div>
         </div>

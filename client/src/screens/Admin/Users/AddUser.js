@@ -23,8 +23,6 @@ const AddUser = () => {
   const navigate = useNavigate();
 
   const onSubmit = (values) => {
-    console.log('values', values);
-
     UserAPI.createUser(values)
       .then(() => {
         navigate('/admin/users');

@@ -39,7 +39,7 @@ class BaseRoutes {
     return res.data?.data;
   };
 
-  _remove = async (path) => {
+  _delete = async (path) => {
     const res = await axios.delete(this._basePath + path);
 
     return res.data?.data;

@@ -10,9 +10,16 @@ import {
 import { EyeIcon, PencilIcon, TrashIcon } from '@heroicons/react/solid';
 import { useNavigate } from 'react-router-dom';
 import { formatBTC } from '../../../../utils/currencyFormatter';
+import { UserAPI } from '../../../../api';
 
-const UsersTable = ({ users, pageCount, loading }) => {
+const UsersTable = ({ users, pageCount, loading, reload }) => {
   const navigate = useNavigate();
+
+  const deleteUser = (id) => {
+    UserAPI.deleteUser(id).then(() => {
+      reload();
+    });
+  };
 
   return (
     <>
@@ -49,7 +56,12 @@ const UsersTable = ({ users, pageCount, loading }) => {
                   >
                     <PencilIcon className="h-5 w-5" />
                   </button>
-                  <button className="text-danger">
+                  <button
+                    className="text-danger"
+                    onClick={() => {
+                      deleteUser(user._id);
+                    }}
+                  >
                     <TrashIcon className="h-5 w-5" />
                   </button>
                 </div>
