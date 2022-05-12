@@ -1,6 +1,8 @@
 import InputField from '../../../Shared/Form/InputField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { UserAPI } from '../../../../api';
+import { useEffect } from 'react';
 
 const initialValues = {
   email: '',
@@ -14,9 +16,14 @@ const validationSchema = Yup.object({
   password: Yup.string().min(6, 'Password must be at least 6 characters'),
 });
 
-const ProfileCard2 = () => {
+const ProfileCard2 = ({ user }) => {
   const onSubmit = (values) => {
-    console.log(values);
+    UserAPI.updateUser(user._id, {
+      email: values.email,
+      password: values.password,
+    }).then(() => {
+      formik.setFieldValue('password', '');
+    });
   };
 
   const formik = useFormik({
@@ -24,6 +31,10 @@ const ProfileCard2 = () => {
     validationSchema,
     onSubmit,
   });
+
+  useEffect(() => {
+    formik.setValues(user);
+  }, [user]);
 
   return (
     <div className="col-span-2 w-full rounded-2xl bg-white shadow-card lg:col-span-1">
