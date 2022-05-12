@@ -10,6 +10,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 const AccountInfo = ({ id, bankName, number, verified }) => {
+  console.log(id, bankName, number, verified);
+
   const navigate = useNavigate();
   const [showAccountInfo, setShowAccountInfo] = useState(false);
 
@@ -57,13 +59,19 @@ const AccountInfo = ({ id, bankName, number, verified }) => {
       <div className="flex items-center gap-4">
         <div
           className={`flex h-10 w-10 items-center justify-center rounded-full border border-border text-white ${
-            verified ? 'bg-success' : 'bg-danger'
+            verified === 'approved'
+              ? 'bg-success'
+              : verified === 'pending'
+              ? 'bg-primary'
+              : 'bg-danger'
           }`}
         >
-          {verified && <CheckIcon className="h-6 w-6" />}
+          {verified === 'approved' && <CheckIcon className="h-6 w-6" />}
         </div>
-        {verified ? (
+        {verified === 'approved' ? (
           <p className="cursor-pointer hover:text-primary">Verified</p>
+        ) : verified === 'pending' ? (
+          <p className="cursor-pointer hover:text-primary">Pending</p>
         ) : (
           <p className="cursor-pointer hover:text-primary">Not Verified</p>
         )}

@@ -64,7 +64,7 @@ class UserController {
       const { _page, _limit } = req.query;
 
       const page = parseInt(_page, 10) || 1;
-      const limit = parseInt(_limit, 10) || 10;
+      const limit = parseInt(_limit, 10) || 100;
 
       const users = await User.find({
         role: {
@@ -194,7 +194,7 @@ class UserController {
       const { _page, _limit, status, user } = req.query;
 
       const page = parseInt(_page, 10) || 1;
-      const limit = parseInt(_limit, 10) || 10;
+      const limit = parseInt(_limit, 10) || 100;
 
       const bankAccounts = await BankAccount.find({
         ...(user ? { user } : {}),

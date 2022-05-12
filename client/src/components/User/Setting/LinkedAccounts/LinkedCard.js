@@ -1,8 +1,22 @@
 import AccountInfo from './AccountInfo';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../../contexts/AuthContext';
+import { useEffect, useState } from 'react';
+import { UserAPI } from '../../../../api';
 
 const LinkedCard = () => {
   const navigate = useNavigate();
+
+  const { user: authUser } = useAuth();
+  const [bankAccounts, setBankAccounts] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    UserAPI.getBankAccounts({ user: authUser._id }).then((res) => {
+      setBankAccounts(res.bankAccounts);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <div className="col-span-2 w-full rounded-2xl bg-white shadow-card">
@@ -11,13 +25,26 @@ const LinkedCard = () => {
       </h4>
 
       <div className="space-y-6 p-5">
-        <AccountInfo id={1} bankName="Bank of America" number="1234567895421" />
-        <AccountInfo
-          id={2}
-          bankName="Bank of America"
-          number="1234567895421"
-          verified
-        />
+        {loading ? (
+          <div className="text-center">
+            <div className="text-xl font-medium">Loading...</div>
+          </div>
+        ) : (
+          <>
+            {bankAccounts.map((bankAccount) => {
+              console.log(bankAccount);
+              return (
+                <AccountInfo
+                  key={bankAccount._id}
+                  id={bankAccount._id}
+                  bankName={bankAccount.bankName}
+                  number={bankAccount.accountNumber}
+                  verified={bankAccount.status}
+                />
+              );
+            })}
+          </>
+        )}
 
         <div className="pt-4">
           <button

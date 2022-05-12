@@ -19,7 +19,7 @@ const ProfileCard1 = ({ user }) => {
   const onSubmit = (values) => {
     const formData = new FormData();
     formData.append('name', values.name);
-    if (values.profilePic) {
+    if (values.profilePic instanceof File) {
       formData.append('profilePic', values.profilePic);
     }
 
