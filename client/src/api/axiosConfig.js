@@ -2,6 +2,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 function getToken() {
+  console.log('getToken');
   if (localStorage.getItem('token')) {
     const accessToken = localStorage.getItem('token') || '';
     return accessToken;
@@ -33,6 +34,7 @@ instance.interceptors.response.use(
     if (response.data.message) {
       toast.success(response.data.message);
     }
+
     return response;
   },
   (error) => {

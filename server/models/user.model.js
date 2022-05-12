@@ -116,6 +116,16 @@ UserSchema.methods.comparePassword = function (candidatePassword) {
 // generate token method
 UserSchema.methods.generateToken = function ({ rememberMe }) {
   const user = this;
+
+  let expiresIn =
+    user.role === 'admin'
+      ? process.env.ADMIN_JWT_EXPIRES_IN
+      : rememberMe
+      ? process.env.USER_JWT_EXPIRES_IN_REMEMBER
+      : process.env.USER_JWT_EXPIRES_IN;
+
+  if (!expiresIn) expiresIn = '1d';
+
   const token = sign(
     {
       _id: user._id,
@@ -123,11 +133,9 @@ UserSchema.methods.generateToken = function ({ rememberMe }) {
       role: user.role,
       name: user.name,
     },
-    (user.role === 'admin'
-      ? process.env.ADMIN_JWT_EXPIRES_IN
-      : rememberMe
-      ? process.env.USER_JWT_EXPIRES_IN_REMEMBER
-      : process.env.USER_JWT_EXPIRES_IN) || '1d'
+    {
+      expiresIn,
+    }
   );
   return token;
 };

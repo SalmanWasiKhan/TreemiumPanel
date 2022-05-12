@@ -6,7 +6,7 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const MainMenu = ({ links }) => {
-  const { logout } = useAuth();
+  const { logout, isAdmin } = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -41,7 +41,9 @@ const MainMenu = ({ links }) => {
               className="flex w-full gap-4 px-4 py-4 font-medium text-danger transition hover:bg-border/5"
               onClick={() =>
                 logout(() => {
-                  navigate('/login');
+                  if (isAdmin) {
+                    navigate('/admin/login');
+                  } else navigate('/login');
                 })
               }
             >

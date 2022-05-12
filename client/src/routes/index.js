@@ -4,6 +4,7 @@ import AuthRoute from './AuthRoute';
 
 const UserLayout = lazy(() => import('../screens/User/UserLayout'));
 const AdminLayout = lazy(() => import('../screens/Admin/AdminLayout'));
+const AdminSignIn = lazy(() => import('../screens/Admin/SignIn'));
 const SignIn = lazy(() => import('../screens/User/SignIn'));
 const ForgotPassword = lazy(() => import('../screens/User/ForgotPassword'));
 const ResetPassword = lazy(() => import('../screens/User/ResetPassword'));
@@ -14,6 +15,10 @@ const AppRouter = () => {
       <Routes>
         <Route path="/*" element={<UserLayout />} />
         <Route path="/admin/*" element={<AdminLayout />} />
+        <Route
+          path="admin/signin"
+          element={<AuthRoute component={<AdminSignIn />} type="admin" />}
+        />
 
         <Route path="/signin" element={<AuthRoute component={<SignIn />} />} />
         <Route

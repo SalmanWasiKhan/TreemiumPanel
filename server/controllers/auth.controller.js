@@ -39,6 +39,7 @@ class AuthController {
             name: userData.name,
             email: userData.email,
             profileImage: userData.profileImage,
+            role: userData.role,
           },
         },
       });

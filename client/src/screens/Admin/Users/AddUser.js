@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { UserAPI } from '../../../api';
+import { toast } from 'react-toastify';
 
 const initialValues = {
   name: '',
@@ -11,7 +12,7 @@ const initialValues = {
 };
 
 const validationSchema = Yup.object({
-  username: Yup.string().required('Username is required'),
+  name: Yup.string().required('Username is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),
   password: Yup.string()
     .min(6, 'Password must be at least 6 characters')
@@ -22,9 +23,15 @@ const AddUser = () => {
   const navigate = useNavigate();
 
   const onSubmit = (values) => {
-    UserAPI.createUser(values).then(() => {
-      navigate('/admin/users');
-    });
+    console.log('values', values);
+
+    UserAPI.createUser(values)
+      .then(() => {
+        navigate('/admin/users');
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
   };
 
   const formik = useFormik({

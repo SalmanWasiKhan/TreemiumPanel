@@ -5,7 +5,7 @@ class AuthAPI extends BaseRoutes {
     super('/auth');
   }
 
-  login = async (email, password, rememberMe) => {
+  login = async ({ email, password, rememberMe }) => {
     const res = await this._post('/login', { email, password, rememberMe });
     return res;
   };

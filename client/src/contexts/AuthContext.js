@@ -1,44 +1,29 @@
 import { useContext, createContext, useEffect, useState } from 'react';
-// import { useMutation } from 'react-query';
-// import { AuthAPI } from '../api';
-// import { decodeToken } from 'react-jwt';
+import { AuthAPI } from '../api';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // const { mutate: _login } = useMutation(AuthAPI.login);
-  // const { mutate: _logout } = useMutation(AuthAPI.logout);
+  const _login = AuthAPI.login;
 
   const login = (user, onSuccess) => {
-    // _login(user, {
-    //   onSuccess: (token) => {
-    //     if (onSuccess) onSuccess();
+    _login(user)
+      .then((res) => {
+        if (onSuccess) onSuccess();
 
-    //     localStorage.setItem('token', token);
+        localStorage.setItem('token', res.token);
 
-    //     const decodedToken = decodeToken(token);
-    //     setUser(decodedToken);
-    //   },
-    // });
-    localStorage.setItem('token', 'Dummy Token');
-    setUser({
-      name: 'Test User',
-      email: 'user@test.com',
-    });
-    if (onSuccess) onSuccess();
+        const userData = res.user;
+        setUser(userData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const logout = (onSuccess) => {
-    // _logout(null, {
-    //   onSuccess: () => {
-    //     localStorage.removeItem('token');
-    //     setUser(null);
-
-    //     if (onSuccess) onSuccess();
-    //   },
-    // });
     localStorage.removeItem('token');
     setUser(null);
     if (onSuccess) onSuccess();
@@ -46,15 +31,10 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    // const user = decodeToken(token);
-    // if (user) {
-    //   setUser(user);
-    // }
-    if (token) {
-      setUser({
-        name: 'Test User',
-        email: 'user@test.com',
-      });
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user && token) {
+      setUser(user);
     }
   }, []);
 
@@ -70,17 +50,9 @@ const AuthProvider = ({ children }) => {
     const listener = (event) => {
       if (event.key === 'token') {
         const token = localStorage.getItem('token');
-        // const user = decodeToken(token);
-        // if (user) {
-        //   setUser(user);
-        // } else {
-        //   setUser(null);
-        // }
-        if (token) {
-          setUser({
-            name: 'Test User',
-            email: 'user@test.com',
-          });
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user && token) {
+          setUser(user);
         } else {
           setUser(null);
         }
@@ -101,6 +73,7 @@ const AuthProvider = ({ children }) => {
         login,
         logout,
         isLoggedIn: !!user,
+        isAdmin: user?.role === 'admin',
       }}
     >
       {children}
@@ -109,13 +82,14 @@ const AuthProvider = ({ children }) => {
 };
 
 const useAuth = () => {
-  const { user, login, logout, isLoggedIn } = useContext(AuthContext);
+  const { user, login, logout, isLoggedIn, isAdmin } = useContext(AuthContext);
 
   return {
     user,
     login,
     logout,
     isLoggedIn,
+    isAdmin,
   };
 };
 
