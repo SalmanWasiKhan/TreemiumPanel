@@ -224,6 +224,28 @@ class UserController {
     }
   }
 
+  // get a single bank account
+  static async getBankAccount(req, res) {
+    try {
+      const bankAccount = await BankAccount.findById(req.params.id);
+
+      if (!bankAccount) {
+        return res.status(404).json({
+          message: 'Bank account not found',
+        });
+      }
+
+      return res.status(200).json({
+        data: bankAccount,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        message: 'Internal server error',
+      });
+    }
+  }
+
   // update a bank account
   static async updateBankAccount(req, res) {
     try {

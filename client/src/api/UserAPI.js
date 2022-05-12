@@ -53,13 +53,18 @@ class UserAPI extends BaseRoutes {
     return res;
   };
 
+  getBankAccount = async (id) => {
+    const res = await this._get(`/bank-accounts/${id}`);
+    return res;
+  };
+
   requestBankAccount = async (data) => {
     const res = await this._post('/bank-accounts', data);
     return res;
   };
 
   updateBankAccount = async (id, data) => {
-    const res = await this._put(`/bank-accounts/${data.id}`, data);
+    const res = await this._put(`/bank-accounts/${id}`, data);
     return res;
   };
 

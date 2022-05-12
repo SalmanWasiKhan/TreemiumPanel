@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate, useParams } from 'react-router-dom';
 import routingImage from '../../assets/images/routing.png';
+import { UserAPI } from '../../api';
 
 const initialValues = {
   routingNumber: '',
@@ -22,7 +23,9 @@ const EditAccount = () => {
   const { id } = useParams();
 
   const onSubmit = (values) => {
-    console.log(values);
+    UserAPI.updateBankAccount(id, values).then(() => {
+      navigate('/setting/linked-accounts');
+    });
   };
 
   const formik = useFormik({
@@ -30,6 +33,15 @@ const EditAccount = () => {
     validationSchema,
     onSubmit,
   });
+
+  useEffect(() => {
+    UserAPI.getBankAccount(id).then((account) => {
+      formik.setFieldValue('routingNumber', account.routingNumber);
+      formik.setFieldValue('accountNumber', account.accountNumber);
+      formik.setFieldValue('fullName', account.fullName);
+      formik.setFieldValue('bankName', account.bankName);
+    });
+  }, []);
 
   useEffect(() => {
     if (id) {

@@ -10,6 +10,7 @@ router.get(
   requireUser({ self: 'query.user', admin: true }),
   UserController.getBankAccounts
 );
+router.get('/bank-accounts/:id', requireUser(), UserController.getBankAccount);
 router.get(
   '/:id',
   requireUser({ self: 'params.id', admin: true }),
