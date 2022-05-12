@@ -16,7 +16,7 @@ router.get(
 router.put(
   '/:id',
   requireUser({ admin: true }),
-  WithdrawRequestController.updateWithdrawRequest
+  WithdrawRequestController.approveWithdrawRequest
 );
 
 module.exports = router;

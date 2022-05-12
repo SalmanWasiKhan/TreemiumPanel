@@ -2,7 +2,7 @@ const express = require('express');
 const authRouter = require('./auth.routes');
 const countriesRouter = require('./countries.routes');
 const userRouter = require('./user.routes');
-const withdrawRequestsRouter = require('./withdrawRequests.routes');
+const withdrawRequestsRouter = require('./withdrawRequest.routes');
 const constantsRouter = require('./constants.routes');
 
 const router = express.Router();

@@ -2,9 +2,10 @@ import InputField from '../../../components/Shared/Form/InputField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import { UserAPI } from '../../../api';
 
 const initialValues = {
-  username: '',
+  name: '',
   email: '',
   password: '',
 };
@@ -21,7 +22,9 @@ const AddUser = () => {
   const navigate = useNavigate();
 
   const onSubmit = (values) => {
-    console.log(values);
+    UserAPI.createUser(values).then(() => {
+      navigate('/admin/users');
+    });
   };
 
   const formik = useFormik({
@@ -41,8 +44,8 @@ const AddUser = () => {
           <InputField
             label="Username"
             placeholder="John Doe"
-            {...formik.getFieldProps('username')}
-            error={formik.touched.username && formik.errors.username}
+            {...formik.getFieldProps('name')}
+            error={formik.touched.name && formik.errors.name}
           />
 
           <InputField
