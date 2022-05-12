@@ -1,27 +1,39 @@
-const { currencies, exchangeRates, fee } = require('../constants');
+const { currencies, exchangeRates, fee, vat } = require('../constants');
 
 class ConstantsController {
   // get currencies
   static getCurrencies(req, res) {
-    res.status(200).json(currencies);
+    res.status(200).json({
+      data: currencies,
+    });
   }
 
   // get exchange rates
   static getExchangeRates(req, res) {
-    res.status(200).json(exchangeRates);
+    res.status(200).json({
+      data: exchangeRates,
+    });
   }
 
   // get fee
   static getFee(req, res) {
-    res.status(200).json(fee);
+    res.status(200).json({ data: fee });
+  }
+
+  // get vat
+  static getVAT(req, res) {
+    res.status(200).json({ data: vat });
   }
 
   // get all constants
   static getAll(req, res) {
     res.status(200).json({
-      currencies,
-      exchangeRates,
-      fee,
+      data: {
+        currencies,
+        exchangeRates,
+        fee,
+        vat,
+      },
     });
   }
 }

@@ -1,7 +1,8 @@
-import { Table, Tbody, Tr, Td } from '../../../Shared/Table';
-import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/outline';
+import { Table, Tbody, Tr, Td, Pagination } from '../../../Shared/Table';
+import { CheckIcon, BanIcon } from '@heroicons/react/outline';
+import { formatBTC, formatUSD } from '../../../../utils/currencyFormatter';
 
-const ActivitiesCard = () => {
+const ActivitiesCard = ({ pageCount }) => {
   const activities = [
     {
       type: 'withdraw',
@@ -20,15 +21,45 @@ const ActivitiesCard = () => {
 
       <Table>
         <Tbody>
-          <Tr>
-            <Td>
-              <span className="h-7 w-7 rounded-full bg-success text-white">
-                <ArrowUpIcon className="h-4 w-4" />
-              </span>
-            </Td>
-          </Tr>
+          {activities?.map((request) => (
+            <Tr key={request._id}>
+              <Td className="text-center">{formatBTC(request.amount)}</Td>
+              <Td className="text-center">{formatUSD(request.totalAmount)}</Td>
+              <Td className="text-center">
+                {request.status === 'pending' ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <button
+                      className="transition hover:text-success"
+                      onClick={() => {}}
+                    >
+                      <CheckIcon className="h-5 w-5" />
+                    </button>
+                    <button className="transition hover:text-danger">
+                      <BanIcon className="h-5 w-5" />
+                    </button>
+                  </div>
+                ) : request.status === 'approved' ? (
+                  <div className="text-success">
+                    <CheckIcon className="mx-auto h-6 w-6" />
+                  </div>
+                ) : (
+                  <div className="text-danger">
+                    <BanIcon className="mx-auto h-6 w-6" />
+                  </div>
+                )}
+              </Td>
+            </Tr>
+          ))}
+          {activities?.length === 0 && (
+            <Tr>
+              <Td colSpan={4} className="text-center">
+                No users found
+              </Td>
+            </Tr>
+          )}
         </Tbody>
       </Table>
+      {pageCount > 1 && <Pagination totalPages={pageCount} />}
     </div>
   );
 };
