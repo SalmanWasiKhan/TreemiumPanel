@@ -1,14 +1,35 @@
 import { Table, Tbody, Tr, Td, Pagination } from '../../../Shared/Table';
 import { CheckIcon } from '@heroicons/react/outline';
 import { formatBTC, formatUSD } from '../../../../utils/currencyFormatter';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useSearchParams from '../../../../hooks/useSearchParams';
+import { WithdrawRequestAPI } from '../../../../api';
 
 const ActivitiesCard = ({ user }) => {
-  const [requests, setRequests] = useState([]);
-  const [loading, setLoading] = useState([]);
   const { search } = useSearchParams();
-  const pageCount = parseInt(search.page, 10) || 1;
+  const currentPage = parseInt(search.page || '1', 10);
+  const perPage = parseInt(search.perPage || '10', 10);
+
+  const [requests, setRequests] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const getRequests = () => {
+    setLoading(true);
+    WithdrawRequestAPI.getWithdrawRequests({
+      user: user._id,
+      page: currentPage,
+      limit: perPage,
+    }).then((res) => {
+      setRequests(res.withdrawRequests);
+      setTotalPages(res.totalPages);
+      setLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    getRequests();
+  }, [currentPage, perPage]);
 
   return (
     <div className="col-span-2 w-full rounded-2xl bg-white  shadow-card">
@@ -47,7 +68,7 @@ const ActivitiesCard = ({ user }) => {
                     </div>
                     {request.status === 'approved' ? (
                       <p className="cursor-pointer hover:text-primary">
-                        Verified
+                        Accepted
                       </p>
                     ) : request.status === 'pending' ? (
                       <p className="cursor-pointer hover:text-primary">
@@ -55,7 +76,7 @@ const ActivitiesCard = ({ user }) => {
                       </p>
                     ) : (
                       <p className="cursor-pointer hover:text-primary">
-                        Not Verified
+                        Rejected
                       </p>
                     )}
                   </div>
@@ -78,7 +99,7 @@ const ActivitiesCard = ({ user }) => {
             )}
           </Tbody>
         </Table>
-        {pageCount > 1 && <Pagination totalPages={pageCount} />}
+        {totalPages > 1 && <Pagination totalPages={totalPages} />}
       </div>
     </div>
   );

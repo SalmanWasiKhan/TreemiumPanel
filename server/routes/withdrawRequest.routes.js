@@ -10,7 +10,7 @@ router.post(
 );
 router.get(
   '/',
-  requireUser({ self: 'body.user', admin: true }),
+  requireUser({ self: 'query.user', admin: true }),
   WithdrawRequestController.getWithdrawRequests
 );
 router.put(

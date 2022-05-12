@@ -105,7 +105,9 @@ class WithdrawRequestController {
       );
 
       return res.status(200).json({
-        message: 'Withdraw request approved!',
+        message: approved
+          ? 'Withdraw request approved!'
+          : 'Withdraw request rejected!',
         data: updatedWithdrawRequest,
       });
     } catch (error) {
