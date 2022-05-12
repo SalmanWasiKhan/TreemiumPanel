@@ -17,8 +17,8 @@ app.use(fileUpload());
 app.use(deserializeUser);
 
 // static
-app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'build')));
+app.use('/public', express.static('public'));
+app.use(express.static('build'));
 
 // logger
 app.use((req, res, next) => {

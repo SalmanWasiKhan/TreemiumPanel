@@ -2,6 +2,8 @@ import InputField from '../../../Shared/Form/InputField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import ProfilePicUpload from '../../../Shared/Form/ProfilePicUpload';
+import { useEffect } from 'react';
+import { UserAPI } from '../../../../api';
 
 const initialValues = {
   name: '',
@@ -13,7 +15,7 @@ const validationSchema = Yup.object({
   profilePic: Yup.mixed(),
 });
 
-const ProfileCard1 = () => {
+const ProfileCard1 = ({ user }) => {
   const onSubmit = (values) => {
     const formData = new FormData();
     formData.append('name', values.name);
@@ -21,7 +23,7 @@ const ProfileCard1 = () => {
       formData.append('profilePic', values.profilePic);
     }
 
-    console.log(formData);
+    UserAPI.updateUser(user._id, formData, true);
   };
 
   const formik = useFormik({
@@ -29,6 +31,10 @@ const ProfileCard1 = () => {
     validationSchema,
     onSubmit,
   });
+
+  useEffect(() => {
+    formik.setValues(user);
+  }, [user]);
 
   return (
     <div className=" w-full rounded-2xl bg-white shadow-card ">

@@ -66,7 +66,11 @@ class UserController {
       const page = parseInt(_page, 10) || 1;
       const limit = parseInt(_limit, 10) || 10;
 
-      const users = await User.find({})
+      const users = await User.find({
+        role: {
+          $ne: 'admin',
+        },
+      })
         .skip((page - 1) * limit)
         .limit(limit);
 
@@ -101,7 +105,7 @@ class UserController {
 
       const update = req.body;
 
-      const profilePic = req.files.profilePic;
+      const profilePic = req.files?.profilePic;
 
       if (profilePic) {
         const profilePicPath = uploadFiles(profilePic, 'users');

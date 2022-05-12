@@ -3,7 +3,7 @@ const { decode } = require('../utils/jwt.utils');
 const deserializeUser = async (req, res, next) => {
   // get token from auth header
   let token = req.headers.authorization || req.headers.Authorization;
-  token = token.replace('Bearer ', '');
+  token = token?.replace('Bearer ', '');
 
   if (!token) return next();
 

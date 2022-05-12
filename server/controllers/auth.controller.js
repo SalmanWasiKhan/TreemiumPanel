@@ -9,7 +9,7 @@ class AuthController {
 
       if (!user) {
         return res.status(401).json({
-          message: 'User not found',
+          message: 'Invalid credentials',
         });
       }
 
@@ -17,7 +17,7 @@ class AuthController {
 
       if (!isMatch) {
         return res.status(401).json({
-          message: 'Wrong password',
+          message: 'Invalid credentials',
         });
       }
 

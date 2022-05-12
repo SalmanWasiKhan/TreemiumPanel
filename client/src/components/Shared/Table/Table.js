@@ -1,7 +1,7 @@
 const Table = ({ children, className, ...props }) => {
   return (
     <table
-      className={`table-spacing w-full border-separate ${className}`}
+      className={`table-spacing z-0 w-full border-separate ${className}`}
       {...props}
     >
       {children}

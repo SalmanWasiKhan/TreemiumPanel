@@ -2,7 +2,6 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 function getToken() {
-  console.log('getToken');
   if (localStorage.getItem('token')) {
     const accessToken = localStorage.getItem('token') || '';
     return accessToken;
@@ -40,6 +39,7 @@ instance.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
+      window.location.reload();
     }
 
     if (error.response?.data?.length > 0) {

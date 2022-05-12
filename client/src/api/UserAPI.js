@@ -26,7 +26,7 @@ class UserAPI extends BaseRoutes {
   };
 
   updateUser = async (id, data, withImage) => {
-    const res = await this._put(`/${data.id}`, data, {
+    const res = await this._put(`/${id}`, data, {
       headers: {
         'Content-Type': withImage ? 'multipart/form-data' : 'application/json',
       },

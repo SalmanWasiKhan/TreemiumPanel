@@ -3,7 +3,9 @@ const Countries = require('../models/countries.model');
 class CountriesController {
   static async getAllCountries(req, res) {
     try {
-      const countries = await await Countries.find().select('country');
+      const countries = await await Countries.find()
+        .select('country')
+        .sort('country');
       return res.status(200).json({
         data: countries,
       });

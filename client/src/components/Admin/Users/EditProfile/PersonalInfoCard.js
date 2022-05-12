@@ -2,6 +2,8 @@ import InputField from '../../../Shared/Form/InputField';
 import SelectField from '../../../Shared/Form/SelectField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useEffect, useState } from 'react';
+import { CountriesAPI, UserAPI } from '../../../../api';
 
 const initialValues = {
   name: '',
@@ -27,32 +29,26 @@ const validationSchema = Yup.object({
   country: Yup.string(),
 });
 
-const countries = [
-  {
-    _id: 1,
-    name: 'Afghanistan',
-  },
-  {
-    _id: 2,
-    name: 'Albania',
-  },
-  {
-    _id: 3,
-    name: 'Algeria',
-  },
-  {
-    _id: 4,
-    name: 'Andorra',
-  },
-  {
-    _id: 5,
-    name: 'Angola',
-  },
-];
+const PersonalInfoCard = ({ user }) => {
+  const [countries, setCountries] = useState([]);
 
-const PersonalInfoCard = () => {
+  useEffect(() => {
+    CountriesAPI.getAll().then((countries) => {
+      setCountries(countries);
+    });
+  }, []);
+
   const onSubmit = (values) => {
-    console.log(values);
+    UserAPI.updateUser(user._id, {
+      name: values.name,
+      email: values.email,
+      dateOfBirth: values.dateOfBirth,
+      presentAddress: values.presentAddress,
+      permanentAddress: values.permanentAddress,
+      city: values.city,
+      postalCode: values.postalCode,
+      country: values.country,
+    });
   };
 
   const formik = useFormik({
@@ -60,6 +56,10 @@ const PersonalInfoCard = () => {
     validationSchema,
     onSubmit,
   });
+
+  useEffect(() => {
+    formik.setValues(user);
+  }, [user]);
 
   return (
     <div className="col-span-1 w-full rounded-2xl bg-white shadow-card md:col-span-2 lg:col-span-3">
@@ -119,8 +119,8 @@ const PersonalInfoCard = () => {
         <SelectField
           label="Country"
           placeholder="Country"
-          options={countries.map((country) => ({
-            label: country.name,
+          options={countries?.map((country) => ({
+            label: country.country,
             value: country._id,
           }))}
           {...formik.getFieldProps('country')}

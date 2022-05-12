@@ -11,7 +11,7 @@ import { EyeIcon, PencilIcon, TrashIcon } from '@heroicons/react/solid';
 import { useNavigate } from 'react-router-dom';
 import { formatBTC } from '../../../../utils/currencyFormatter';
 
-const UsersTable = ({ users, pageCount }) => {
+const UsersTable = ({ users, pageCount, loading }) => {
   const navigate = useNavigate();
 
   return (
@@ -56,10 +56,17 @@ const UsersTable = ({ users, pageCount }) => {
               </Td>
             </Tr>
           ))}
-          {users?.length === 0 && (
+          {!loading && users?.length === 0 && (
             <Tr>
               <Td colSpan={4} className="text-center">
                 No users found
+              </Td>
+            </Tr>
+          )}
+          {loading && (
+            <Tr>
+              <Td colSpan={4} className="text-center">
+                Loading...
               </Td>
             </Tr>
           )}

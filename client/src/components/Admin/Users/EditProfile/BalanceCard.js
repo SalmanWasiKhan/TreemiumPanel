@@ -1,6 +1,9 @@
 import InputField from '../../../Shared/Form/InputField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useEffect } from 'react';
+import { UserAPI } from '../../../../api';
+import useSearchParams from '../../../../hooks/useSearchParams';
 
 const initialValues = {
   balance: '',
@@ -12,9 +15,11 @@ const validationSchema = Yup.object({
     .required('Balance is required'),
 });
 
-const BalanceCard = () => {
+const BalanceCard = ({ user }) => {
   const onSubmit = (values) => {
-    console.log(values);
+    UserAPI.updateUser(user._id, {
+      balance: parseInt(values.balance),
+    });
   };
 
   const formik = useFormik({
@@ -22,6 +27,12 @@ const BalanceCard = () => {
     validationSchema,
     onSubmit,
   });
+
+  useEffect(() => {
+    formik.setValues({
+      balance: user.balance,
+    });
+  }, [user]);
 
   return (
     <div className=" col-span-1 w-full rounded-2xl bg-white shadow-card md:col-span-2 lg:col-span-1">

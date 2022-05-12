@@ -21,7 +21,7 @@ const ProfilePicUpload = ({ value, onChange, maxFileSize, name }) => {
               src={
                 typeof value === 'string' ? value : URL.createObjectURL(value)
               }
-              alt={value}
+              alt={'Profile Pic'}
               className="h-full w-full object-cover"
             />
           )}

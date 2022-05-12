@@ -15,7 +15,7 @@ const requireUser =
       });
     }
 
-    if (self && (user._id !== req[self] || (admin && user.role !== 'admin'))) {
+    if (self && user._id !== req[self] && admin && user.role !== 'admin') {
       return res.status(401).json({
         message: 'Unauthorized',
       });

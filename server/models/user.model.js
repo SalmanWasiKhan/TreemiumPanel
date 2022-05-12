@@ -149,8 +149,7 @@ UserSchema.methods.toJSON = function () {
   delete userObject.password;
 
   if (userObject.profilePic) {
-    userObject.profilePic =
-      process.env.SERVER_URL + '/public/users' + user.profilePic;
+    userObject.profilePic = process.env.SERVER_URL + user.profilePic;
   }
 
   return userObject;
