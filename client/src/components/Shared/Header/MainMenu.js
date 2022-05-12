@@ -10,7 +10,7 @@ const MainMenu = ({ links }) => {
   const navigate = useNavigate();
 
   return (
-    <Menu as="div" className="relative">
+    <Menu as="div" className="relative z-30">
       <Menu.Button className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-body-bg">
         <UserIcon className="h-5 w-5" />
       </Menu.Button>

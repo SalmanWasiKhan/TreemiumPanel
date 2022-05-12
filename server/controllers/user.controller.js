@@ -112,14 +112,16 @@ class UserController {
         update.profilePic = profilePicPath;
       }
 
-      const updatedUser = await User.findByIdAndUpdate(req.params.id, update, {
-        new: true,
+      Object.keys(update).forEach((key) => {
+        user[key] = update[key];
       });
+
+      await user.save();
 
       return res.status(200).json({
         message: 'Profile updated!',
         data: {
-          ...updatedUser.toJSON(),
+          ...user.toJSON(),
         },
       });
     } catch (error) {
