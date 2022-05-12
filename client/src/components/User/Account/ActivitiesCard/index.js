@@ -42,11 +42,9 @@ const ActivitiesCard = ({ user }) => {
             {requests?.map((request) => (
               <Tr key={request._id}>
                 <Td className="text-center">
-                  {request.paymentMethod.bankName}
+                  {request.paymentMethod?.bankName}
                 </Td>
-                <Td className="text-center">
-                  {request.paymentMethod.accountNumber}
-                </Td>
+                <Td className="text-center">{request.paymentMethod?.iban}</Td>
                 <Td className="text-center">{formatBTC(request.amount)}</Td>
                 <Td className="text-center">
                   {formatUSD(request.totalAmount)}

@@ -54,12 +54,20 @@ const Withdraw = ({ user }) => {
     });
   }, []);
 
-  const paymentMethods = user.bankAccounts.map((bankAccount) => {
-    return {
-      value: bankAccount._id,
-      label: bankAccount.bankName,
-    };
-  });
+  const hideAccountNumber = (number) => {
+    const last4Digits = number.substring(number.length - 4);
+    const stars = '*'.repeat(number.length - 4);
+    return `${stars}${last4Digits}`;
+  };
+
+  const paymentMethods = user.bankAccounts
+    ?.filter((bankAccount) => bankAccount.status === 'approved')
+    .map((bankAccount) => {
+      return {
+        value: bankAccount._id,
+        label: bankAccount.bankName + ' ' + hideAccountNumber(bankAccount.iban),
+      };
+    });
 
   return (
     <>

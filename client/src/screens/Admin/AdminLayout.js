@@ -47,7 +47,7 @@ const AdminLayout = () => {
     <div className="h-full min-h-screen w-full ">
       <Sidebar links={sidebarLinks} admin />
 
-      <div className="flex flex-col md:ml-60">
+      <div className="flex h-full min-h-screen flex-col md:ml-60">
         <Header links={headerMenuLinks} />
         <main className="flex-1">
           <AdminRouter />

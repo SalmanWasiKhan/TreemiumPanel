@@ -25,7 +25,7 @@ const Account = () => {
           Welcome Back, <span className="text-heading">{authUser.name}</span>
         </p>
 
-        <div className="mt-8 grid grid-cols-1 items-start gap-7 lg:grid-cols-2">
+        <div className="mt-8 grid grid-cols-2 items-start gap-7">
           {loading ? (
             <div className="col-span-1 text-center lg:col-span-2">
               Loading...

@@ -6,17 +6,17 @@ import routingImage from '../../assets/images/routing.png';
 import { UserAPI } from '../../api';
 
 const initialValues = {
-  routingNumber: '',
-  accountNumber: '',
+  swiftCode: '',
+  iban: '',
   fullName: '',
   bankName: '',
 };
 
 const validationSchema = Yup.object({
-  routingNumber: Yup.number().required('Routing number is required'),
-  accountNumber: Yup.string()
+  swiftCode: Yup.string().required('Routing number is required'),
+  iban: Yup.string()
     .required('Account number is required')
-    .matches(/^\d{9,}$/, 'Invalid account number'),
+    .matches(/^[A-Z]{2}[0-9]+$/, 'Invalid IBAN'),
   fullName: Yup.string().required('Full name is required'),
   bankName: Yup.string().required('Bank name is required'),
 });
@@ -45,16 +45,16 @@ const AddAccount = () => {
 
         <form className="p-5" onSubmit={formik.handleSubmit}>
           <InputField
-            label="Routing number"
-            placeholder="25487"
-            {...formik.getFieldProps('routingNumber')}
-            error={formik.touched.routingNumber && formik.errors.routingNumber}
+            label="Swift Code"
+            placeholder="123FA876WS4"
+            {...formik.getFieldProps('swiftCode')}
+            error={formik.touched.swiftCode && formik.errors.swiftCode}
           />
           <InputField
-            label="Account number"
-            placeholder="1234567895421"
-            {...formik.getFieldProps('accountNumber')}
-            error={formik.touched.accountNumber && formik.errors.accountNumber}
+            label="IBAN"
+            placeholder="IT5345695421"
+            {...formik.getFieldProps('iban')}
+            error={formik.touched.iban && formik.errors.iban}
           />
           <InputField
             label="Full name"
@@ -69,7 +69,7 @@ const AddAccount = () => {
             error={formik.touched.bankName && formik.errors.bankName}
           />
 
-          <img src={routingImage} alt="Routing" className="w-full" />
+          {/* <img src={routingImage} alt="Routing" className="w-full" /> */}
 
           <div className="mt-7 flex items-center justify-center gap-4">
             <button

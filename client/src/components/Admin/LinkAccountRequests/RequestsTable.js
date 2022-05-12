@@ -30,8 +30,8 @@ const RequestsTable = ({ requests, pageCount, loading, reload }) => {
         <Thead>
           <Tr>
             <Th>User</Th>
-            <Th>Routing number</Th>
-            <Th>Account number</Th>
+            <Th>Swift Code</Th>
+            <Th>IBAN</Th>
             <Th>Full name</Th>
             <Th></Th>
           </Tr>
@@ -47,8 +47,8 @@ const RequestsTable = ({ requests, pageCount, loading, reload }) => {
                   {request.user.name}
                 </Link>
               </Td>
-              <Td>{request.routingNumber}</Td>
-              <Td>{request.accountNumber}</Td>
+              <Td>{request.swiftCode}</Td>
+              <Td>{request.iban}</Td>
               <Td>{request.fullName}</Td>
               <Td className="text-center">
                 {request.status === 'pending' ? (

@@ -1,6 +1,6 @@
 const WalletCard = ({ user }) => {
   return (
-    <div className="w-full rounded-2xl bg-white shadow-card">
+    <div className="col-span-2 w-full rounded-2xl bg-white shadow-card lg:col-span-1">
       <h4 className="border-b border-border p-5 text-lg font-medium  text-heading">
         Wallet
       </h4>

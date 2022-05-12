@@ -10,7 +10,7 @@ const WithdrawDetails = ({
   vat,
 }) => {
   return (
-    <div className="w-full rounded-2xl bg-white p-5 shadow-card">
+    <div className="col-span-2 w-full rounded-2xl bg-white p-5 shadow-card lg:col-span-1">
       <Table>
         <Tbody>
           <Tr>

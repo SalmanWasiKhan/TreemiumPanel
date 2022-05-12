@@ -15,12 +15,12 @@ const Schema = mongoose.Schema;
 
 const BankAccountSchema = new Schema(
   {
-    routingNumber: {
+    swiftCode: {
       type: String,
       required: true,
     },
 
-    accountNumber: {
+    iban: {
       type: String,
       required: true,
     },

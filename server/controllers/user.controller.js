@@ -165,12 +165,12 @@ class UserController {
   // request to add a bank account
   static async requestBankAccount(req, res) {
     try {
-      const { routingNumber, accountNumber, fullName, bankName } = req.body;
+      const { swiftCode, iban, fullName, bankName } = req.body;
       const user = req.user._id;
 
       const bankAccount = await BankAccount.create({
-        routingNumber,
-        accountNumber,
+        swiftCode,
+        iban,
         fullName,
         bankName,
         user,

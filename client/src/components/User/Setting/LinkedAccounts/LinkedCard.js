@@ -42,7 +42,7 @@ const LinkedCard = () => {
                   key={bankAccount._id}
                   id={bankAccount._id}
                   bankName={bankAccount.bankName}
-                  number={bankAccount.accountNumber}
+                  number={bankAccount.iban}
                   verified={bankAccount.status}
                   reload={getAccounts}
                 />

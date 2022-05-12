@@ -32,7 +32,7 @@ const RequestsTable = ({ requests, pageCount, loading, reload }) => {
           <Tr>
             <Th>User</Th>
             <Th className="text-center">Bank Name</Th>
-            <Th className="text-center">Account Number</Th>
+            <Th className="text-center">IBAN</Th>
             <Th className="text-center">Request Amount</Th>
             <Th className="text-center">Total</Th>
             <Th></Th>
@@ -50,9 +50,7 @@ const RequestsTable = ({ requests, pageCount, loading, reload }) => {
                 </Link>
               </Td>
               <Td className="text-center">{request.paymentMethod.bankName}</Td>
-              <Td className="text-center">
-                {request.paymentMethod.accountNumber}
-              </Td>
+              <Td className="text-center">{request.paymentMethod.iban}</Td>
               <Td className="text-center">{formatBTC(request.amount)}</Td>
               <Td className="text-center">{formatUSD(request.totalAmount)}</Td>
               <Td className="text-center">
@@ -89,14 +87,14 @@ const RequestsTable = ({ requests, pageCount, loading, reload }) => {
           ))}
           {!loading && requests?.length === 0 && (
             <Tr>
-              <Td colSpan={4} className="text-center">
+              <Td colSpan={6} className="text-center">
                 No users found
               </Td>
             </Tr>
           )}
           {loading && (
             <Tr>
-              <Td colSpan={5} className="text-center">
+              <Td colSpan={6} className="text-center">
                 Loading...
               </Td>
             </Tr>

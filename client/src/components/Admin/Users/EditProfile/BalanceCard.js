@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useEffect } from 'react';
 import { UserAPI } from '../../../../api';
-import useSearchParams from '../../../../hooks/useSearchParams';
 
 const initialValues = {
   balance: '',
@@ -18,7 +17,7 @@ const validationSchema = Yup.object({
 const BalanceCard = ({ user }) => {
   const onSubmit = (values) => {
     UserAPI.updateUser(user._id, {
-      balance: parseInt(values.balance),
+      balance: parseFloat(values.balance),
     });
   };
 
