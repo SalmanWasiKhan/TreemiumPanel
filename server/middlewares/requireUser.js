@@ -15,8 +15,8 @@ const requireUser =
       });
     }
 
-    const selfFields = self.split('.');
-    const selfValue = selfFields.reduce((acc, field) => acc[field], req);
+    const selfFields = self?.split('.');
+    const selfValue = selfFields?.reduce((acc, field) => acc[field], req);
 
     if (self && user._id !== selfValue && admin && user.role !== 'admin') {
       return res.status(401).json({

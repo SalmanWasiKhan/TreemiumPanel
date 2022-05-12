@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import routingImage from '../../assets/images/routing.png';
+import { UserAPI } from '../../api';
 
 const initialValues = {
   routingNumber: '',
@@ -22,7 +23,9 @@ const AddAccount = () => {
   const navigate = useNavigate();
 
   const onSubmit = (values) => {
-    console.log(values);
+    UserAPI.requestBankAccount(values).then(() => {
+      navigate('/setting/linked-accounts');
+    });
   };
 
   const formik = useFormik({
