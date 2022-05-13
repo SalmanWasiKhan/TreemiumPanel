@@ -10,12 +10,12 @@ const Setting = () => {
           Welcome Back, <span className="text-heading">{user.name}</span>
         </p>
 
-        <div className=" mt-8 grid grid-cols-12 items-start gap-7">
-          <div className="col-span-12 md:col-span-5 lg:col-span-3">
+        <div className=" mt-8 grid w-full grid-cols-1 items-start gap-7 md:grid-cols-12">
+          <div className="col-span-1 md:col-span-5 lg:col-span-3">
             <MenuCard />
           </div>
 
-          <div className="col-span-12 md:col-span-7 lg:col-span-9">
+          <div className="col-span-1 md:col-span-7 lg:col-span-9">
             <SettingRouter />
           </div>
         </div>

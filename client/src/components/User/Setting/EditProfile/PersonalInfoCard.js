@@ -120,7 +120,7 @@ const PersonalInfoCard = ({ user }) => {
           label="Country"
           placeholder="Country"
           options={countries.map((country) => ({
-            label: country.name,
+            label: country.country,
             value: country._id,
           }))}
           {...formik.getFieldProps('country')}

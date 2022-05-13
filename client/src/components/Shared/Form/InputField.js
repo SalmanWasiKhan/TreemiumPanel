@@ -18,7 +18,7 @@ const InputField = ({
       <input
         id={name}
         type={type}
-        className="block w-full rounded-ms border border-border bg-body-bg px-5 py-2.5 font-medium text-heading transition duration-150 placeholder:font-medium placeholder:text-heading focus:border-primary focus:ring-0"
+        className="block w-full rounded-ms border border-border bg-body-bg px-5 py-2.5 font-medium text-heading transition duration-150 placeholder:font-medium placeholder:text-heading/60 focus:border-primary focus:ring-0"
         placeholder={placeholder}
         value={value}
         onClick={onClick}

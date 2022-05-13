@@ -1,15 +1,19 @@
-import { PhoneIcon, MailIcon } from '@heroicons/react/solid';
+import { PhoneIcon, MailIcon, UserIcon } from '@heroicons/react/solid';
 
 const BasicInfo = ({ user }) => {
   return (
     <div className="mb-5 flex gap-4 border-b border-border pb-5">
       <div className="h-16 w-16 flex-shrink-0 rounded-full bg-muted">
-        {user?.profilePic && (
+        {user?.profilePic ? (
           <img
             src={user.profilePic}
             alt={user.name}
             className="h-full w-full object-cover"
           />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-white/80 ">
+            <UserIcon className="h-10 w-10" />
+          </div>
         )}
       </div>
       <div className="">

@@ -1,3 +1,4 @@
+import { UserIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 
 const ProfilePicUpload = ({ value, onChange, maxFileSize, name }) => {
@@ -16,7 +17,7 @@ const ProfilePicUpload = ({ value, onChange, maxFileSize, name }) => {
     <div className="relative mb-7">
       <div className="mb-4 flex items-center gap-4">
         <div className="h-14 w-14 flex-shrink-0 rounded-full bg-muted">
-          {value && (
+          {value ? (
             <img
               src={
                 typeof value === 'string' ? value : URL.createObjectURL(value)
@@ -24,6 +25,10 @@ const ProfilePicUpload = ({ value, onChange, maxFileSize, name }) => {
               alt={'Profile Pic'}
               className="h-full w-full object-cover"
             />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-white/80 ">
+              <UserIcon className="h-10 w-10" />
+            </div>
           )}
         </div>
         <div>
